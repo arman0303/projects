@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload & Stream Media</title>
+
+    <style>
+      body {
+        text-align: center;
+        background-color: #000;
+        color: white;
+        font-family: Arial, sans-serif;
+        padding-top: 40px;
+      }
+
+      .upload-box {
+        background-color: #111;
+        padding: 20px;
+        border-radius: 10px;
+        display: inline-block;
+        margin-top: 20px;
+        border: 1px solid #444;
+      }
+
+      input[type="file"] {
+        background: #222;
+        border: 1px solid #555;
+        padding: 10px;
+        border-radius: 8px;
+        color: white;
+        cursor: pointer;
+      }
+
+      #videoPlayer,
+      #imageViewer {
+        width: 80%;
+        max-width: 800px;
+        margin-top: 20px;
+        border-radius: 12px;
+        display: none;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      }
+
+      #imageViewer {
+        max-height: 600px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Upload & Stream Media</h1>
+
+    <div class="upload-box">
+      <label style="font-size: 18px">Choose a Video or Image File:</label
+      ><br /><br />
+      <input id="fileInput" type="file" accept="video/*, image/*" />
+    </div>
+
+    <!-- Video Player -->
+    <video id="videoPlayer" controls></video>
+
+    <!-- Image Viewer -->
+    <img id="imageViewer" />
+
+    <script>
+      const fileInput = document.getElementById("fileInput");
+      const videoPlayer = document.getElementById("videoPlayer");
+      const imageViewer = document.getElementById("imageViewer");
+
+      fileInput.addEventListener("change", () => {
+        const file = fileInput.files[0];
+
+        if (!file) return;
+
+        const fileURL = URL.createObjectURL(file);
+
+        // Check file type
+        if (file.type.startsWith("video")) {
+          imageViewer.style.display = "none";
+          videoPlayer.style.display = "block";
+          videoPlayer.src = fileURL;
+          videoPlayer.play();
+        } else if (file.type.startsWith("image")) {
+          videoPlayer.style.display = "none";
+          imageViewer.style.display = "block";
+          imageViewer.src = fileURL;
+        }
+      });
+    </script>
+  </body>
+</html>

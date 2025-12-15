@@ -5,6 +5,7 @@ body {
   font-family: Arial, sans-serif;
 
   background-image: url("birds.jpg");
+  background-repeat: repeat-x;
   background-size: cover; /* fills entire screen */
   background-position: center; /* keeps image centered */
   background-repeat: no-repeat; /* prevents tiling */

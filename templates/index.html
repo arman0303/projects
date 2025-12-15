@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>URL to QR Code</title>
+    <style>
+      body {
+        font-family: Arial;
+        text-align: center;
+        margin-top: 50px;
+      }
+      input {
+        width: 300px;
+        padding: 10px;
+      }
+      button {
+        padding: 10px 20px;
+        margin-left: 10px;
+        cursor: pointer;
+      }
+      img {
+        margin-top: 20px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Convert URL to QR Code</h2>
+
+    <input type="text" id="urlInput" placeholder="Enter URL here" />
+    <button onclick="generateQR()">Generate QR</button>
+
+    <div>
+      <img id="qrImage" src="" alt="QR Code will appear here" />
+    </div>
+
+    <script>
+      function generateQR() {
+        const url = document.getElementById("urlInput").value;
+        if (!url) {
+          alert("Please enter a URL");
+          return;
+        }
+
+        // Set the img src to the Flask endpoint
+        document.getElementById(
+          "qrImage"
+        ).src = `/generate_qr?url=${encodeURIComponent(url)}`;
+      }
+    </script>
+  </body>
+</html>
